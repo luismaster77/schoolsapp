@@ -6,6 +6,15 @@ var urlBase = 'http://localhost:8090/api';
 export const environment = {
   slash: '/',
   production: false,
+  firebaseConfig : {
+    apiKey: "AIzaSyDrGEStx8_dsDU2r_BBbUy622856GYR1jM",
+    authDomain: "schoolsapp-d96a2.firebaseapp.com",
+    projectId: "schoolsapp-d96a2",
+    storageBucket: "schoolsapp-d96a2.appspot.com",
+    messagingSenderId: "584252130068",
+    appId: "1:584252130068:web:c8d488461dbb7ae3a1b801",
+    measurementId: "G-3Q0YY95YP5"
+  },
   consultarTurnos : urlBase+'/turnos',
   consultarServicios : urlBase+'/servicios',
   consultarComercios : urlBase+'/comercios',

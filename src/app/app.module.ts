@@ -12,6 +12,9 @@ import { TurnoComponent } from './turno/turno.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalComponent } from './_modal/modal.component'; 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
 
   ],
   providers: [],
