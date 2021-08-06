@@ -1,0 +1,132 @@
+<div class="container">
+  <div class="text-right">
+    <button type="submit" class="btn btn-primary" (click)="onNew()">
+      Nuevo Servicio
+    </button>
+  </div>
+  <br>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+
+          <th>Nombre Servicio</th>
+
+          <th>Fecha Apertura</th>
+
+          <th>Fecha Cierre</th>
+
+          <th>Duración</th>
+
+          <th>Comercio</th>
+
+          <th></th>
+
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let servicio of servicios; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+
+          <td>{{ servicio.nombre_servicio }}</td>
+
+          <td>{{ formatDate.getFormat(servicio.hora_apertura) }}</td>
+
+          <td>{{ formatDate.getFormat(servicio.hora_cierre) }}</td>
+
+          <td>{{ servicio.duracion }}&nbsp;min</td>
+
+          <td>{{ servicio.nombre_comercio}}</td>
+
+          <td>
+            <button type="button" class="btn btn-info" (click)="onEdit(i)">
+              Editar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="regentry mt-5" *ngIf="showNew">
+    <div class="title"><strong>{{submitType}} Servicio</strong></div>
+    <form [formGroup]="form" (ngSubmit)="onSave()" novalidate>
+      <div class="form-group row mt-4">
+        <label for="nombre-servicio-input" class="col-2 col-form-label">Nombre Servicio</label>
+        <div class="col-md-4">
+          <input required class="form-control" type="text" 
+          [(ngModel)]="regModel.nombre_servicio" formControlName="nombreServicio" 
+          [ngClass]="{'alert alert-danger':f.nombreServicio.touched && f.nombreServicio.invalid}"/>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="FechaApertura" class="col-2 col-form-label">Fecha Apertura</label>
+        <div class="col-3 input-group">
+          <input required type="date" class="form-control" placeholder="yyyy-mm-dd" formControlName="fechaApertura"
+            [(ngModel)]="regModel.hora_apertura"
+            [ngClass]="{'alert alert-danger':f.fechaApertura.touched && f.fechaApertura.invalid}" 
+            [min]="todaydate"
+            (change)="onchange($event)" />
+        </div>
+        <label for="horaApertura" class="col-2 col-form-label">Hora Apertura</label>
+        <div class="col-3 input-group">
+          <input  required type="time" class="form-control" placeholder="hh:mm:ss" formControlName="horaApertura" 
+          [(ngModel)]="regModel.horaApertura1"
+          [ngClass]="{'alert alert-danger':f.horaApertura.touched && f.horaApertura.invalid}"
+          [min]="timeday"/>
+        </div>
+      </div>
+      <div class="form-group row mt-2">
+        <label for="FechaCierre" class="col-2 col-form-label">Fecha Cierre:&nbsp;</label>
+        <div class="col-3 input-group">
+          <input  required type="date" class="form-control" placeholder="yyyy-mm-dd" formControlName="fechaCierre"
+            [(ngModel)]="regModel.hora_cierre" 
+            [ngClass]="{'alert alert-danger':f.fechaCierre.touched && f.fechaCierre.invalid}"
+            [min]="todaydate"
+            disabled
+            (change)="onchange($event)"/>
+          <div *ngIf="validate" class="alert alert-warning" @fadeIn @fadeOut>
+            <span>{{ alertaMessage }}</span>
+        </div>
+        </div>
+        <label for="horaCierre" class="col-2 col-form-label">Hora Cierre:&nbsp;</label>
+        <div class="col-3 input-group">
+          <input 
+          type="time" class="form-control" placeholder="hh:mm:ss" formControlName="horaCierre" 
+          [(ngModel)]="regModel.horaCierre1" 
+          [ngClass]="{'alert alert-danger':f.horaCierre.touched && f.horaCierre.invalid}"
+          [min]="timeday"
+          required/>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="duracion-input" class="col-2 col-form-label">Duración</label>
+        <div class="col-md-4">
+          <input formControlName="duracion" class="form-control" type="text" maxlength="2" 
+          [(ngModel)]="regModel.duracion"
+          [ngClass]="{'alert alert-danger':f.duracion.touched && f.duracion.invalid}"
+          required/>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="comercio" class="col-2 col-form-label">Comercio:</label>&nbsp;&nbsp;&nbsp;
+        <select formControlName="comercio" class="form-control col-md-4" (ngModelChange)="onChangeComercio($event)"
+        [(ngModel)]="ngModelSelect"
+        [ngClass]="{'alert alert-danger':f.comercio.touched && f.comercio.invalid && f.comercio.errors.required}">
+          <option  [ngValue]="itemComercio.id_comercio" *ngFor="let itemComercio of comercios"
+          >{{itemComercio.nombre_comercio}}</option>
+      </select>
+      </div>
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid || regModel.comercio == 'Seleccione comercio'">{{ submitType }}</button>
+      <button type="submit" class="btn btn-primary ml-3" (click)="onCancel()">
+        Cancelar
+      </button>
+    </form>
+  </div>
+
+  <br />
+</div>

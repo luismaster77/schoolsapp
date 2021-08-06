@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary" (click)="onNew()">
+          Nuevo Comercio
+        </button>
+      </div>
+      <br>
+  <div>
+
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+
+          <th>Nombre Comercio</th>
+
+          <th>Aforo Máximo</th>
+
+          <th></th>
+
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let comercio of comercios; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+
+          <td>{{ comercio.nombre_comercio }}</td>
+
+          <td>{{ comercio.aforo_maximo }}</td>
+
+          <td>
+            <button type="button" class="btn btn-info" (click)="onEdit(i)">
+              Editar
+            </button>
+          </td>
+
+          <!-- <td>
+            <button type="button" class="btn btn-danger" (click)="onDelete(i)">
+              Eliminar
+            </button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="regentry mt-5" *ngIf="showNew">
+  <div class="title"><strong>{{submitType}} Comercio</strong></div>
+  <form [formGroup]="form" (ngSubmit)="onSave()" novalidate>
+    <div class="form-group row mt-4">
+      <label for="nombre-servicio-input" class="col-2 col-form-label">Nombre Comercio</label>
+      <div class="col-md-4">
+        <input required class="form-control" type="text" 
+        [(ngModel)]="regModel.nombre_comercio" formControlName="nombreComercio" 
+        [ngClass]="{'alert alert-danger':f.nombreComercio.touched && f.nombreComercio.invalid}"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="aforo-maximo-input" class="col-2 col-form-label">Aforo Máximo</label>
+      <div class="col-md-4">
+        <input required class="form-control" type="text" 
+        [(ngModel)]="regModel.aforo_maximo" formControlName="aforoMaximo" 
+        [ngClass]="{'alert alert-danger':f.aforoMaximo.touched && f.aforoMaximo.invalid}"/>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" class="btn btn-success" [disabled]="!form.valid">{{ submitType }}</button>
+      <button type="submit" class="btn btn-primary ml-3" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>
+<br />
+</div>
