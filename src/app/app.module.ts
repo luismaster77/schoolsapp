@@ -10,11 +10,12 @@ import { ComercioComponent } from './comercio/comercio.component';
 import { ServicioComponent } from './servicio/servicio.component';
 import { TurnoComponent } from './turno/turno.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalComponent } from './_modal/modal.component'; 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { EstudianteComponent } from './estudiante/estudiante.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     ComercioComponent,
     ServicioComponent,
     TurnoComponent,
-    ModalComponent,
+    EstudianteComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    ToastrModule.forRoot(),
 
   ],
   providers: [],
