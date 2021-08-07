@@ -1,5 +1,11 @@
 {
-  "projects": {
-    "default": "schoolsapp-d96a2"
+  "targets": {
+    "schoolsapp-d96a2": {
+      "hosting": {
+        "turnos": [
+          "schoolsapp-d96a2"
+        ]
+      }
+    }
   }
 }
