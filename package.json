@@ -1,5 +1,5 @@
 {
-  "name": "turnos",
+  "name": "Sistema school app",
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
@@ -63,7 +63,7 @@
     "inquirer-autocomplete-prompt": "^1.0.1",
     "open": "^7.0.3"
   },
-  "description": "Sistema para la generación de turnos",
+  "description": "Sistema para la gestión de estudiantes",
   "keywords": [
     "angular-cli",
     "angular",
